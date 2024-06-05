@@ -1,10 +1,10 @@
 <template>
 	<div class="chat-header">
 		<div class="user-info">
-			<img class="avatar" :src="user.avatar" alt="Avatar" />
+			<img class="avatar" :src="'src/assets/avatar/' + user.profileImageURL + '.svg'" alt="Avatar" />
 			<div class="col">
 				<span class="name">{{ user.name }}</span>
-				<span class="ine">{{ user.ine }}</span>
+				<span class="ine">INE : {{ user.ine }}</span>
 			</div>
 		</div>
 		<div class="separator"></div>
@@ -18,8 +18,6 @@
 </script>
 
 <style scoped>
-	.chat-header {
-	}
 	.user-info {
 		display: flex;
     margin: 20px;
