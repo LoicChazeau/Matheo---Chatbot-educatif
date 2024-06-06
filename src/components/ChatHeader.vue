@@ -24,6 +24,9 @@
 </script>
 
 <style scoped>
+	.chat-header {
+		height: 80px;
+	}
 	.user-info {
 		display: flex;
 		margin: 20px;

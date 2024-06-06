@@ -1,9 +1,11 @@
 <template>
 	<div class="chat-messages">
 		<div v-for="message in messages" :key="message.id" :class="['message', message.sender === 'bot' ? 'bot-message' : 'user-message']">
-			<p>{{ message.message }}</p>
-			<span v-if="message.timestamp">{{ new Date(message.timestamp.seconds * 1000).toLocaleString() }}</span>
-			<span v-else>Timestamp inconnu</span>
+			<img v-if="message.sender === 'bot'" src="../assets/avatar-bot.svg" alt="Bot Avatar" class="avatar avatar-bot" />
+			<div class="message-content">
+				<p>{{ message.message }}</p>
+			</div>
+			<img v-if="message.sender === 'user'" :src="avatarSrc" alt="User Avatar" class="avatar avatar-user" />
 		</div>
 	</div>
 </template>
@@ -12,7 +14,13 @@
 	import { collection, query, where, onSnapshot } from 'firebase/firestore';
 
 	export default {
-		props: ['selectedChatId'],
+		props: ['selectedChatId', 'user'],
+		computed: {
+			avatarSrc() {
+				const avatarPath = new URL(`../assets/avatar/${this.user.profileImageURL}.svg`, import.meta.url).href;
+				return avatarPath;
+			},
+		},
 		data() {
 			return {
 				messages: [],
@@ -64,33 +72,56 @@
 </script>
 
 <style scoped>
-	.message {
-		margin: 10px;
-		padding: 10px;
-		border-radius: 5px;
+	.chat-messages {
+		flex: 1;
+		overflow-y: auto;
+		padding: 0 25px;
+		padding-top: 25px;
+		padding-bottom: 15px;
+		color: #000;
 	}
-
+	.message {
+		display: flex;
+		align-items: flex-start;
+		margin: 15px;
+		padding: 10px;
+		border-radius: 12px;
+		max-width: 70%;
+	}
 	.bot-message {
-		background-color: #f1f1f1;
+		background-color: #e7f4f5;
 		text-align: left;
 	}
-
 	.user-message {
-		background-color: #daf8cb;
-		text-align: right;
+		background-color: #f5f5f5;
+		text-align: left;
+		justify-content: flex-end;
+		margin-left: auto;
 	}
-
-	.message p {
+	.message-content {
+		background-color: #f5f5f5;
+		padding: 6px;
+		border-radius: 10px;
+		position: relative;
+	}
+	.bot-message .message-content {
+		background-color: #e7f4f5;
+	}
+	.avatar {
+		width: 40px;
+		height: 40px;
+		margin: 0 10px;
+	}
+	.avatar-bot {
+		order: -1;
+		margin-right: 20px;
+	}
+	.avatar-user {
+		order: 2;
+		margin-left: 20px;
+	}
+	.message-content p {
 		margin: 0;
-	}
-
-	.message span {
-		font-size: 0.8rem;
-		color: #888;
-	}
-
-	.chat-messages {
-		overflow-y: auto;
-		max-height: 70vh; /* Ajustez selon vos besoins */
+		word-wrap: break-word;
 	}
 </style>
