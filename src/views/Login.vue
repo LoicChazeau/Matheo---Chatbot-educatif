@@ -18,7 +18,7 @@
           <img
             v-for="avatar in avatars"
             :key="avatar"
-            :src="'src/assets/avatar/' + avatar + '.svg'"
+            :src="'../assets/avatar/' + avatar + '.svg'"
             :alt="avatar"
             @click="selectAvatar(avatar)"
             :class="{ selected: selectedAvatar === avatar }"
