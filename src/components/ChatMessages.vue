@@ -65,7 +65,9 @@ export default {
     scrollToBottom() {
       this.$nextTick(() => {
         const container = this.$refs.messagesContainer;
-        container.scrollTop = container.scrollHeight;
+        if (container.scrollHeight > container.clientHeight) {
+          container.scrollTop = container.scrollHeight;
+        }
       });
     },
   },
