@@ -1,5 +1,5 @@
 <template>
-  <div class="chat-messages">
+  <div class="chat-messages" ref="messagesContainer">
     <div v-for="message in messages" :key="message.id" :class="['message', message.sender === 'bot' ? 'bot-message' : 'user-message']">
       <img v-if="message.sender === 'bot'" src="../assets/avatar-bot.svg" alt="Bot Avatar" class="avatar avatar-bot" />
       <div class="message-content">
@@ -62,11 +62,20 @@ export default {
         });
       });
     },
+    scrollToBottom() {
+      this.$nextTick(() => {
+        const container = this.$refs.messagesContainer;
+        container.scrollTop = container.scrollHeight;
+      });
+    },
   },
   beforeDestroy() {
     if (this.unsubscribe) {
       this.unsubscribe();
     }
+  },
+  updated() {
+    this.scrollToBottom();
   },
 };
 </script>

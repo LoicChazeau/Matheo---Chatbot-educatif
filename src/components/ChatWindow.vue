@@ -2,7 +2,7 @@
   <div class="chat-window">
     <ChatHeader :user="user" />
     <ChatMessages :user="user" :selectedChatId="selectedChatId" />
-    <MessageInput @openImageToText="showImageToTextModal" :selectedChatId="selectedChatId" @sendMessage="handleUserMessage" />
+    <MessageInput @openImageToText="showImageToTextModal" :selectedChatId="selectedChatId" @messageSent="handleMessageSent" />
     <ImageToText @sendMessage="sendConvertedText" ref="imageToTextModal" />
   </div>
 </template>
@@ -23,8 +23,27 @@ export default {
   },
   props: ["user", "selectedChatId"],
   methods: {
-    handleUserMessage(message) {
-      console.log("User message received: ", message);
+    handleMessageSent(userMessage) {
+      // Simulate bot response after 1 second
+      setTimeout(async () => {
+        const botResponses = [
+          "Hello! How can I help you?",
+          "Thank you for your message!",
+          "I am here to assist you.",
+          "Can you please provide more details?",
+          "I will look into it.",
+        ];
+
+        const botMessage = botResponses[Math.floor(Math.random() * botResponses.length)];
+
+        const messagesRef = collection(this.$db, "messages");
+        await addDoc(messagesRef, {
+          conversation_id: this.selectedChatId,
+          message: botMessage,
+          sender: "bot",
+          timestamp: serverTimestamp(),
+        });
+      }, 1500);
     },
     showImageToTextModal() {
       this.$refs.imageToTextModal.open();
@@ -38,6 +57,8 @@ export default {
         message: message,
         sender: "user",
         timestamp: serverTimestamp(),
+      }).then(() => {
+        this.handleMessageSent(message); // Déclenche une réponse du bot après l'envoi du message converti
       });
     },
   },

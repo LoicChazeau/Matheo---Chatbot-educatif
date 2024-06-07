@@ -45,6 +45,8 @@ export default {
         timestamp: serverTimestamp(),
       });
 
+      this.$emit("messageSent", this.message);
+
       this.message = "";
       this.resetTextareaHeight(); // Reset the textarea height
     },
