@@ -18,7 +18,7 @@
           <img
             v-for="avatar in avatars"
             :key="avatar"
-            :src="'../assets/avatar/' + avatar + '.svg'"
+            :src="getAvatarUrl(avatar)"
             :alt="avatar"
             @click="selectAvatar(avatar)"
             :class="{ selected: selectedAvatar === avatar }"
@@ -50,6 +50,9 @@ export default {
     };
   },
   methods: {
+    getAvatarUrl(avatar) {
+    return new URL(`../assets/avatar/${avatar}.svg`, import.meta.url).href;
+  },
     async login() {
       if (!this.ine || !this.password) {
         this.errorMessage = "Veuillez entrer votre numéro INE et votre mot de passe";
