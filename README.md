@@ -11,7 +11,7 @@
     Développement d'un Chatbot Éducatif Avancé
     <br />
     <br />
-    <a href="#">Web site</a>
+    <a href="https://matheo-pi.vercel.app">Web site</a>
   </p>
 </div>
 
@@ -22,13 +22,15 @@ Vue.js
 <br/>
 Vite
 <br/>
-Netlify
+Firebase
+<br/>
+Vercel
 
 
 <!-- GETTING STARTED -->
 ## Utilisation
 
-Url du projet Front : 
+Url du projet Front : https://matheo-pi.vercel.app
 
 ### Clone local
 
