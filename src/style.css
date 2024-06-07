@@ -1,35 +1,34 @@
 :root {
-	font-family: "Marianne", sans-serif;
-	line-height: 1.5;
-	font-weight: normal;
-	color: #0f1a29;
-	background-color: #ffffff;
-	scroll-behavior: smooth;
+  font-family: "Marianne", sans-serif;
+  line-height: 1.5;
+  font-weight: normal;
+  color: #ffffff;
+  background-color: #151718;
+  scroll-behavior: smooth;
 }
 
 body {
-	margin: 0;
+  margin: 0;
 }
 
 p {
-	margin: 0;
+  margin: 0;
 }
 
 body {
-	overflow: hidden
+  overflow: hidden;
 }
 
-
 @font-face {
-  font-family: 'Marianne';
-  src: url('./assets/font/Marianne-Regular.otf') format('opentype');
+  font-family: "Marianne";
+  src: url("./assets/font/Marianne-Regular.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Marianne';
-  src: url('./assets/font/Marianne-Bold.otf') format('opentype');
+  font-family: "Marianne";
+  src: url("./assets/font/Marianne-Bold.otf") format("opentype");
   font-weight: bold;
   font-style: normal;
 }

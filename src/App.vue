@@ -1,9 +1,24 @@
-<script setup>
-</script>
-
 <template>
-	<router-view class="router-view"></router-view>
+  <div id="app">
+    <router-view />
+  </div>
 </template>
 
-<style scoped>
+<script>
+export default {
+  name: "App",
+  created() {
+    const user = localStorage.getItem("user");
+    if (!user && this.$route.path !== "/") {
+      this.$router.push("/");
+    }
+  },
+};
+</script>
+
+<style>
+#app {
+  height: 100vh;
+  width: 100vw;
+}
 </style>
